@@ -14,6 +14,14 @@ $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
+//Root api
+$app->get('', function ($request, $response) {
+    return JsonResponse::withJson($response, array(
+        "ProjectName" => "PHP WebApi Project",
+        "Student" => "Sławomir Skiba, 13797",
+        "Features" => "JWT Auth, Crud, Routing"
+    ));
+});
 // Include route files
 require __DIR__.'/routes/auth.php';
 require __DIR__.'/routes/users.php';
