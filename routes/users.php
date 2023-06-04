@@ -22,7 +22,7 @@ $app->group('/users', function (RouteCollectorProxy $group) use ($mysqli) {
         } else {
             return JsonResponse::badRequest($response);
         }
-    })->add(new OnlyAdminMiddleware());
+    })->add(new AuthMiddleware())->add(new OnlyAdminMiddleware());
 
 
     // Create a user
@@ -82,6 +82,6 @@ $app->group('/users', function (RouteCollectorProxy $group) use ($mysqli) {
             } else
                 return JsonResponse::badRequest($response, $ex->getMessage());
         }
-    })->add(new OnlyAdminMiddleware());
-})->add(new AuthMiddleware());
+    })->add(new AuthMiddleware())->add(new OnlyAdminMiddleware());
+});
  // end of $app->group('/users'
